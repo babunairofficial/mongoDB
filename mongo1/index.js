@@ -11,9 +11,14 @@ async function main() {
 
 
 //Schema for our collection named User
-
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   age: Number,
 });
+
+
+//Models
+
+//models also named as the collection, User
+const User = mongoose.model("User", userSchema);
