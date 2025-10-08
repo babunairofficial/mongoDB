@@ -6,6 +6,14 @@ main().then(() => {
 
 async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/test');
-
  
 }
+
+
+//Schema for our collection named User
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  age: Number,
+});
