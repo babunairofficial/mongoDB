@@ -23,33 +23,8 @@ const userSchema = new mongoose.Schema({
 //models also named as the collection, User
 const User = mongoose.model("User", userSchema);
 
-
-// const user1 = new User({
-//   name: "sachin",
-//   email: "sachin@gmail.com",
-//   age: 48,
-// });
-
-// user1.save(); //also an asynchronous method. Returns a promise
-
-// const user2 = new User({
-//   name: "rahul",
-//   email: "rahul@ymail.com",
-//   age: 47,
-// });
-
-// user2.save().then((res) => {
-//   console.log(res);
-// }).catch((err) => {
-//   console.log(err);
-// }); //added some extras with the promise
-
-
-//insert many documents in collection
-User.insertMany([
-  {name: "rohit", email: "rohit@hotmail.com", age:34},
-  {name: "ravi", email: "ravi@rediff.com", age: 32},
-  {name: "suresh", email: "suresh@yahoo.com", age: 40},
-]).then((res) => {
+//find model
+User.find({age: {$lte: 35}}).then((res) => { //find documents with an age criteria
   console.log(res);
+}).catch(err => {console.log(err);
 });
