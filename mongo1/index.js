@@ -23,8 +23,8 @@ const userSchema = new mongoose.Schema({
 //models also named as the collection, User
 const User = mongoose.model("User", userSchema);
 
-//Update model - UpdateOne
-User.updateOne({name: "rahul"}, {age: 50}).then((res) => { //update one document having name "rahul" to age = 50
+//Update model - updateMany
+User.updateMany({age: {$lte: 35}}, {age: 41}).then((res) => { //update many documents having age less than 35 to age = 41
   console.log(res);
 }).catch((err) => {
   console.log(err);
