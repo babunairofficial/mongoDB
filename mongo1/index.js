@@ -23,9 +23,12 @@ const userSchema = new mongoose.Schema({
 //models also named as the collection, User
 const User = mongoose.model("User", userSchema);
 
-//Update model - updateMany
-User.updateMany({age: {$lte: 35}}, {age: 41}).then((res) => { //update many documents having age less than 35 to age = 41
+//Update model - findOneAndUpdate
+User.findOneAndUpdate({name: "suresh"}, {age: 45}).then((res) => { //update one document having name as "suresh" to age = 45 and display it
+  //it would display the pre-update data
   console.log(res);
 }).catch((err) => {
   console.log(err);
 });
+//to display the post-update data options can be used as another parameter within the model
+//[options.new=true]
