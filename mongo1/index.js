@@ -23,8 +23,8 @@ const userSchema = new mongoose.Schema({
 //models also named as the collection, User
 const User = mongoose.model("User", userSchema);
 
-//find model
-User.find({age: {$lte: 35}}).then((res) => { //find documents with an age criteria
+//find models - findOne 
+User.findOne({age: {$lte: 35}}).then((res) => { //find documents with an age criteria
   console.log(res);
 }).catch(err => {console.log(err);
 });
