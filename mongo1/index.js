@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
 //models also named as the collection, User
 const User = mongoose.model("User", userSchema);
 
-//DELETE model - findByIdAndDelete
-User.findByIdAndDelete("68e92af37679b9df3928a0de").then((res) => {  //delete document by Id and display the deleted documents
+//DELETE model - findOneAndDelete
+User.findOneAndDelete({name: "suresh"}).then((res) => {  //delete one document by Id and display the deleted document
   console.log(res);
 });
