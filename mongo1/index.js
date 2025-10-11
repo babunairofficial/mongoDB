@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
 //models also named as the collection, User
 const User = mongoose.model("User", userSchema);
 
-//DELETE model - deleteOne
-User.deleteOne({name: "ravi"}).then((res) => {  //delete one document 
+//DELETE model - deleteMany
+User.deleteMany({email: "sachin@gmail.com"}).then((res) => {  //delete many documents
   console.log(res);
 });
