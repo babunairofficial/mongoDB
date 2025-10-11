@@ -23,12 +23,10 @@ const userSchema = new mongoose.Schema({
 //models also named as the collection, User
 const User = mongoose.model("User", userSchema);
 
-//Update model - findOneAndUpdate
-User.findOneAndUpdate({name: "suresh"}, {age: 45}).then((res) => { //update one document having name as "suresh" to age = 45 and display it
-  //it would display the pre-update data
+//Update model - findByIdAndUpdate
+User.findByIdAndUpdate("68e9178b98d19c1a03b2dd25", {name: "laxman"}, {new: true}).then((res) => { //update one document having having a ID
+  //and display the post-update data as options object have been used. 
   console.log(res);
 }).catch((err) => {
   console.log(err);
 });
-//to display the post-update data options can be used as another parameter within the model
-//[options.new=true]
