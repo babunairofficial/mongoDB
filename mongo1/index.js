@@ -23,8 +23,9 @@ const userSchema = new mongoose.Schema({
 //models also named as the collection, User
 const User = mongoose.model("User", userSchema);
 
-//find models - findById
-User.findById("68e92af37679b9df3928a0df").then((res) => { //find documents with an age criteria
+//Update model - UpdateOne
+User.updateOne({name: "rahul"}, {age: 50}).then((res) => { //update one document having name "rahul" to age = 50
   console.log(res);
-}).catch(err => {console.log(err);
+}).catch((err) => {
+  console.log(err);
 });
