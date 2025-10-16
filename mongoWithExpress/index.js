@@ -9,6 +9,8 @@ app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(express.urlencoded({ extended: true }));
+
 main()
 .then(() => {
     console.log("connection successful");
@@ -29,6 +31,28 @@ app.get("/chats", async (req, res) => {
 //New Route
 app.get("/chats/new", (req, res) => {
     res.render("new.ejs");
+});
+
+//Create Route
+app.post("/chats", (req, res) => {
+    let {from, to, message} = req.body;
+    let newChat = new Chat({
+        from: from,
+        to: to,
+        message: message,
+        created_at: new Date()
+    });
+    // console.log(newChat);
+
+    newChat.save().then((res) => {
+        console.log("chat was saved");
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+    // res.send("working");
+    res.redirect("/chats");
 });
 
 app.get("/", (req, res) => {
