@@ -26,9 +26,13 @@ async function main() {
 
 //Index Route
 app.get("/chats", async (req, res) => {
-    let chats = await Chat.find();
-    console.log(chats);
-    res.render("index.ejs", {chats});
+    try{
+        let chats = await Chat.find();
+        console.log(chats);
+        res.render("index.ejs", {chats});
+    } catch(err) {
+        next(err);
+    }    
 });
 
 //New Route
@@ -38,25 +42,22 @@ app.get("/chats/new", (req, res) => {
 });
 
 //Create Route
-app.post("/chats", (req, res) => {
-    let {from, to, message} = req.body;
-    let newChat = new Chat({
-        from: from,
-        to: to,
-        message: message,
-        created_at: new Date()
-    });
-    // console.log(newChat);
+app.post("/chats", async (req, res, next) => {
+    try {
+        let {from, to, message} = req.body;
+        let newChat = new Chat({
+            from: from,
+            to: to,
+            message: message,
+            created_at: new Date()
+        });
+        // console.log(newChat);
 
-    newChat.save().then((res) => {
-        console.log("chat was saved");
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-
-    // res.send("working");
-    res.redirect("/chats");
+        await newChat.save();
+        res.redirect("/chats");
+    } catch(err) {
+        next(err);
+    }
 });
 
 //NEW - Show Route
@@ -71,10 +72,14 @@ app.get("/chats/:id", async (req, res, next) => {
 
 //Edit route
 app.get("/chats/:id/edit", async (req, res) => {
-    let {id} = req.params;
-    let chat = await Chat.findById(id);
+    try {
+        let {id} = req.params;
+        let chat = await Chat.findById(id);
 
-    res.render("edit.ejs", {chat});
+        res.render("edit.ejs", {chat});
+    } catch(err) {
+        next(err);
+    }    
 });
 
 //Update Route
